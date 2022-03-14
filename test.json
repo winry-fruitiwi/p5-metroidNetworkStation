@@ -8,19 +8,19 @@
       }
     ],
 
-    "ms": 28593
+    "ms": 15431
   },
 
   {
     "text": "I've run a full analysis. But I cannot account for why you lost consciousness. My readings indicate dramatic physical changes in you. ",
     "highlightIndices": [],
-    "ms": 38795
+    "ms": 28593
   },
 
   {
     "text": "Whatever caused these changes seems to have stripped you of most abilities. You might call it physical amnesia. ",
     "highlightIndices": [],
-    "ms": 46763
+    "ms": 38795
   },
 
   {
@@ -31,7 +31,7 @@
         "end": 128
       }
     ],
-    "ms": 60982
+    "ms": 46763
   },
 
   {
@@ -47,7 +47,7 @@
         "end": 211
       }
     ],
-    "ms": 76635
+    "ms": 60982
   },
 
   {
@@ -58,7 +58,7 @@
         "end": 160
       }
     ],
-    "ms": 91680
+    "ms": 76635
   },
 
   {
@@ -69,7 +69,7 @@
         "end": 49
       }
     ],
-    "ms": 96781
+    "ms": 91680
   },
 
   {
@@ -80,7 +80,7 @@
         "end": 160
       }
     ],
-    "ms": 107449
+    "ms": 96781
   },
 
   {
@@ -91,7 +91,7 @@
         "end": 99
       }
     ],
-    "ms": 114319
+    "ms": 107449
   },
 
   {
@@ -102,6 +102,6 @@
         "end": 76
       }
     ],
-    "ms": 122426
+    "ms": 114319
   }
 ]
