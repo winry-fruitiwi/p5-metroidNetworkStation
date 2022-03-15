@@ -139,7 +139,7 @@ class DialogBox {
 
         // if we've gone through the seconds in jumpMillis, we're ready to
         // advance our passages.
-        if (millis() >= this.jumpMillis) {
+        if (millis() >= this.jumpMillis + voiceStartMillis) {
             if (frameCount % 1 === 0) {
                 this.index += 1
                 this.index = constrain(this.index, 0, passage.length-1)
@@ -163,7 +163,7 @@ class DialogBox {
             if (this.index >= passage.length-1) {
                 if (
                     this.passageIndex < this.passages.length-1 &&
-                    millis() >= skipMillis
+                    millis() >= skipMillis + voiceStartMillis
                 ) {
                     this.index = 0
                     this.passageIndex += 1
@@ -289,5 +289,4 @@ class DialogBox {
             }
         }
     }
-
 }

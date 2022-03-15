@@ -33,10 +33,11 @@ let textList = []
 let highlightList = [] // a list of tuples specifying highlights and indexes
 let msPerPassage = [] // how long to wait before advancing a passage
 let startEndTimes = [] // the start and end times of each passage
+
 // there's a period of no dialog box before the text starts. This represents
 // how long that is.
-let jumpMillis = 15500
-let dialogBox, cam
+let jumpMillis = 15431
+let dialogBox, cam, voiceStartMillis
 
 function setup() {
     createCanvas(640, 360, WEBGL)
@@ -44,7 +45,7 @@ function setup() {
     textFont(font, 15)
     cam = new Dw.EasyCam(this._renderer, {distance: 240});
 
-    voice.play()
+    // voice.play()
     p5amp = new p5.Amplitude()
 
     // look through the JSON for the passages and highlight indices
@@ -120,11 +121,19 @@ function draw() {
 
     // drawBlenderAxes()
 
+    /*
+        TODO
+            dialog box should only show up if the voice is running
+    */
+
     showGlobe()
 
     // text("Not just groovy!", width/2, height/2) // just seeing the font :)
-    // render the dialog
-    dialogBox.render()
+    // render the dialog box if the audio context is running
+
+    if (p5amp.getLevel() !== 0) {
+        dialogBox.render()
+    }
 }
 
 // fills the globe with points
@@ -291,7 +300,7 @@ function initializeGlobeArray() {
 }
 
 // prevent the context menu from showing up :3 nya~
-document.oncontextmenu = function () {
+document.oncontextmenu = function() {
     return false;
 }
 
@@ -312,7 +321,7 @@ function renderCover() {
     torus(r+10, 10, 100, 100)
 
     translate(0, 0, 1)
-    circle(0, 0, r*2-1)
+    circle(0, 0, r*2)
     pop()
 }
 
@@ -346,8 +355,27 @@ function renderWires() {
     pop()
 }
 
-function touchStarted() {
-    if (getAudioContext().state !== 'running') {
-        getAudioContext().resume().then(r => {});
+// function touchStarted() {
+//     if (getAudioContext().state !== 'running') {
+//         getAudioContext().resume().then(r => {});
+//     }
+// }
+
+function keyPressed() {
+    if (key === "z") {
+        // stop the recording and the sketch if you press a
+        voice.stop()
+        noLoop()
+    }
+
+    if (key === "s") {
+        // starts the voice at jumpMillis/1000 seconds. if the audio context
+        // isn't running, run it.
+        voice.play()
+        // voice.jump(jumpMillis/1000.0)
+        voiceStartMillis = millis()
+        if (getAudioContext().state !== 'running') {
+            getAudioContext().resume().then(r => {});
+        }
     }
 }
