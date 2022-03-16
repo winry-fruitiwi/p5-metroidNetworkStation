@@ -216,14 +216,21 @@ function showGlobe() {
                 and then drop off somewhat quickly
             */
             distance = sqrt(avg.x ** 2 + avg.z ** 2)
-            currentVoiceAmp = 50 * map(currentVoiceAmp, 0, 0.25, 0, 1)
+            currentVoiceAmp = r * map(currentVoiceAmp, 0, 0.25, 0, 1)
                 / (distance ** (1.9))
 
             let sine = sin(distance / 10 - frameCount / 30)
 
             let oscillationOffset = (r + 2.5 * sine + 2.5) / r
 
-            oscillationOffset -= currentVoiceAmp
+
+            let passageIndex = dialogBox.passageIndex
+            if ((
+                millis() > startEndTimes[passageIndex][0] + voiceStartMillis &&
+                millis() < startEndTimes[passageIndex][1] + voiceStartMillis
+            )) {
+                oscillationOffset -= currentVoiceAmp
+            }
 
             specularMaterial(210, 100, 22)
             // fill(210, 100, 22)
@@ -321,7 +328,7 @@ function renderCover() {
     torus(r+10, 10, 100, 100)
 
     translate(0, 0, 1)
-    circle(0, 0, r*2)
+    circle(0, 0, r*2 + 3)
     pop()
 }
 
@@ -354,12 +361,6 @@ function renderWires() {
     }
     pop()
 }
-
-// function touchStarted() {
-//     if (getAudioContext().state !== 'running') {
-//         getAudioContext().resume().then(r => {});
-//     }
-// }
 
 function keyPressed() {
     if (key === "z") {
