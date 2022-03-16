@@ -140,16 +140,15 @@ class DialogBox {
         // if we've gone through the seconds in jumpMillis, we're ready to
         // advance our passages.
         if (millis() >= this.jumpMillis + voiceStartMillis) {
-            if (frameCount % 1 === 0) {
+            if (frameCount % 2 === 0) {
                 this.index += 1
                 this.index = constrain(this.index, 0, passage.length-1)
             }
 
             textSize(18)
-            fill(0, 0, 100)
-            this.displayPassage("ADAM", 62, 260)
+            fill(188, 20, 94)
+            this.displayPassage("ADAM", 47, 260)
             textSize(14)
-
             if (this.index === passage.length - 1) {
                 // use a sine wave to mimic a breathing alpha
                 fill(189, 19, 80, 20 + 80*abs(sin(frameCount/30)))
